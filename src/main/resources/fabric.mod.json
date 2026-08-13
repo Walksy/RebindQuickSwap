@@ -16,6 +16,9 @@
 	"entrypoints": {
 		"main": [
 			"walksy.quickswaprebinder.RebindQuickSwapMod"
+		],
+		"walksylib": [
+			"walksy.quickswaprebinder.config.WalksyLibIntegration"
 		]
 	},
 	"mixins": [

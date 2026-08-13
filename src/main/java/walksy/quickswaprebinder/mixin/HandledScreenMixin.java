@@ -1,8 +1,7 @@
 package walksy.quickswaprebinder.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.input.MouseButtonEvent;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import walksy.quickswaprebinder.RebindQuickSwapMod;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -10,25 +9,25 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(value = AbstractContainerScreen.class, priority = 1500)
 public abstract class HandledScreenMixin {
-    @Redirect(
+    @ModifyExpressionValue(
             method = "mouseClicked",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/client/input/MouseButtonEvent;hasShiftDown()Z"
             )
     )
-    private boolean redirectClick(MouseButtonEvent instance) {
-        return RebindQuickSwapMod.shouldQuickSwap();
+    private boolean redirectClick(boolean original) {
+        return original || RebindQuickSwapMod.shouldQuickSwap();
     }
 
-    @Redirect(
+    @ModifyExpressionValue(
             method = "mouseReleased",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/client/input/MouseButtonEvent;hasShiftDown()Z"
             )
     )
-    private boolean redirectRelease(MouseButtonEvent instance) {
-        return RebindQuickSwapMod.shouldQuickSwap();
+    private boolean redirectRelease(boolean original) {
+        return original || RebindQuickSwapMod.shouldQuickSwap();
     }
 }
