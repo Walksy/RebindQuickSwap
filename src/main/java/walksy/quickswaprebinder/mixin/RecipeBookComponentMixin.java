@@ -7,9 +7,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import walksy.quickswaprebinder.RebindQuickSwapMod;
 
-/**
- * Original Commit: https://github.com/Walksy/RebindQuickSwap/pull/1
- */
 @Mixin(value = RecipeBookComponent.class, priority = 1500)
 public class RecipeBookComponentMixin {
 
